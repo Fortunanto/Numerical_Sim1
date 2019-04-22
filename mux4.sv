@@ -11,6 +11,11 @@ module mux4 (
 // Put your code here
 // ------------------
 
+logic t0,t1;
+
+mux2 t0_mux_inst(.z(t0),.d0(d0),.d1(d1),.sel(sel[0]));
+mux2 t1_mux_inst(.z(t1),.d0(d2),.d1(d3),.sel(sel[0]));
+mux2 o1_mux_inst(.z(z),.d0(t0),.d1(t1),.sel(sel[1]));
 
 // End of your code
 
