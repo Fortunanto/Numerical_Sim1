@@ -11,40 +11,33 @@ module fas (
 // Put your code here
 // ------------------
 
-logic xo1;
-logic xo2;
+logic ans_xor_a;
+logic ans_xnor_a;
 
-logic no1;
-logic no2;
-logic no3;
-logic no4;
-logic no6;
-//logic no7;
-logic no8;
-logic no9;
-logic no10;
+logic b_nor_c;
+logic b_or_c;
+logic b_and_c;
+logic b_xor_c;
 
-logic an1;
-logic an2;
-logic an3;
-logic an4;
+logic and_for_cout;
 
-XOR2 xor1(.Z(xo1),.A(a_ns),.B(a));
-NOR2 nor1(.Z(no1),.A(xo1),.B(xo1));
-AND2 and1(.Z(an1),.A(no1),.B(no3));
-NOR2 nor4(.Z(no4),.A(an1),.B(an2));
-NOR2 nor5(.Z(cout),.A(no4),.B(no4));
-NOR2 nor2(.Z(no2),.A(b),.B(cin));
-NOR2 nor3(.Z(no3),.A(no2),.B(no2));
-AND2 and2(.Z(an2),.A(cin),.B(b)); // and2 = AND(cin,b)
-//NOR2 nor7(.Z(no7),.A(an2),.B(an2)); // nor7 = NOR(and2,and2) = NOT(and2) = NAND(cin,b)
-NOR2 nor8(.Z(no8),.A(a),.B(a)); // nor8 = NOT(a)
-AND2 and4(.Z(an4),.A(xo2),.B(no8)); // and4 = AND(xo2,nor8) = AND(XOR(b,cin),NOT(a))
-XOR2 xor2(.Z(xo2),.A(b),.B(cin)); // xor2 = XOR(b,cin)
-NOR2 nor6(.Z(no6),.A(xo2),.B(xo2)); // nor6 = NOT(xor2) = XNOR(b,cin)
-AND2 and3(.Z(an3),.A(a),.B(no6)); // and3 = AND(a,nor6) = AND(a,XNOR(b,cin))
-NOR2 nor9(.Z(no9),.A(an4),.B(an3)); // nor9 = NOR(and4,and3) = NOR(AND(NAND(cin,b),NOT(a)),AND(a,XNOR(b,cin)))
-NOR2 nor10(.Z(s),.A(no9),.B(no9)); // nor10 = NOT(nor9)
-// End of your code
+logic nor_for_cout;
+
+XOR2 xo1(.Z(ans_xor_a),.A(a_ns),.B(a));
+NOR2 no1(.Z(ans_xnor_a),.A(ans_xor_a),.B(ans_xor_a));
+
+NOR2 no2(.Z(b_nor_c),.A(b),.B(cin));
+NOR2 no3(.Z(b_or_c),.A(b_nor_c),.B(b_nor_c));
+
+AND2 an1(.Z(and_for_cout),.A(ans_xnor_a),.B(b_or_c));
+NOR2 no4(.Z(nor_for_cout),.A(and_for_cout),.B(b_and_c));
+NOR2 no5(.Z(cout),.A(nor_for_cout),.B(nor_for_cout));
+
+AND2 an2(.Z(b_and_c),.A(b),.B(cin));
+
+XOR2 xo2(.Z(b_xor_c),.A(b),.B(cin));
+XOR2 xo3(.Z(s),.A(a),.B(b_xor_c));
+
+// end of your code
 
 endmodule
