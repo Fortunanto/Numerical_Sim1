@@ -11,6 +11,15 @@ module alu64bit (
 // Put your code here
 // ------------------
 
+logic [62:0] c_between;
+
+alu1bit (.a(a[0]),.b(b[0]),.cin(cin),.op(op),.s(s[0]),.cout(c_between[1]));
+
+for (i=1; i<63; i++) begin
+alu1bit (.a(a[i]),.b(b[i]),.cin(c_between[i-1]),.op(op),.s(s[i]),.cout(c_between[i+1]));
+end
+
+alu1bit (.a(a[63]),.b(b[63]),.cin(c_between[63]),.op(op),.s(s[62]),.cout(cout));
 
 // End of your code
 
