@@ -11,7 +11,9 @@ begin
 a_ns=1;
 a=0;
 b=1;
-cin=1;
+cin=0;
+#100
+a_ns=0;
 end
 
 fas fas_inst(.a(a),.b(b),.cin(cin),.a_ns(a_ns),.cout(cout),.s(s));
